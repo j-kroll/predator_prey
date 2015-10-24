@@ -6,7 +6,10 @@ It uses wolf and sheep, and prints to the terminal.
 This program was written for the Evolutionary Computation Final project, Spring term 2015
 Written by Julia Kroll, Valerie Lambert, and Caitlin Donahue
 
-This uses the ECJ Package
+This uses the ECJ Package (A Java-based Evolutionary Computation Research System)
+https://cs.gmu.edu/~eclab/projects/ecj/
+
+Our code is in the directory ecj/ec/app/predator_prey
 
 ----------------------------------------------------------------------------------------------------------
 
