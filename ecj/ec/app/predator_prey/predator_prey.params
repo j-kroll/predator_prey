@@ -1,0 +1,138 @@
+#Parameter file for predator_prey
+#Authors: Julia Kroll, Valerie Lambert, Caitlin Donahue
+
+parent.0 = ../../gp/koza/koza.params
+eval.problem = ec.app.predator_prey.PredatorPrey
+eval.problem.data = ec.app.predator_prey.PredatorPreyData
+
+######Parameters that we modify start here#########
+#You can also modify the functions if you don't want the wolves to see food.
+
+#Number of moves
+eval.problem.moves = 40
+
+#Size of the map (These should be equal)
+eval.problem.xdim = 10
+eval.problem.ydim = 10
+
+# 0 intelligence moves randomly
+# 1 can see adjacent squares, and tries to run in the oppositte direction of the first wolf it sees
+# 2 can also see diagonals
+# 3 can also see two squares away
+# 4 sheep evolve
+eval.problem.sheepintel = 3
+
+# 0 intelligence moves randomly
+# 1 intelligence tries to evolve 
+eval.problem.wolfintel = 1
+
+#Population sizes
+eval.problem.wolfsize = 3
+eval.problem.sheepsize = 30
+
+#The number of populations
+#If you are evolving wolves this MUST equal wolfsize
+#If you are evolving wolves and sheep this MUST equal wolfsize + sheepsize
+pop.subpops =                           3
+
+#Number of Generations
+generations=                            1000
+
+
+#Complexity Stuff
+gp.koza.half.min-depth = 2
+gp.koza.half.max-depth = 9
+
+gp.koza.half.growp = 0.5
+
+gp.koza.xover.maxdepth = 17
+gp.koza.mutate.maxdepth = 17
+
+gp.koza.grow.min-depth = 7
+gp.koza.grow.max-depth = 8
+
+####We didn't modify these parameters#######
+
+eval =                                  ec.coevolve.MultiPopCoevolutionaryEvaluator
+eval.num-shuffled=			            1
+eval.num-current=                       0
+eval.num-elites =                       0
+eval.num-prev =                         0
+eval.select-current =                   ec.select.RandomSelection
+eval.select-prev =                      ec.select.RandomSelection
+select.tournament.size =                10
+
+
+#Sets up the subpopulations
+pop.default-subpop =		         	0
+pop.default-subpop =		         	0
+pop.subpop.0.species.fitness = ec.simple.SimpleFitness
+pop.subpop.0 =                          ec.Subpopulation
+pop.subpop.0.duplicate-retries =        2
+pop.subpop.0.size =                     250
+pop.subpop.0.species =                  ec.gp.GPSpecies
+pop.subpop.0.species.ind =              ec.gp.GPIndividual
+
+
+
+
+### The functions
+gp.fs.size = 1
+gp.fs.0.name = f0
+
+#If you want to run with only wolves, set this to 19
+#If you want to evolve sheep set to 24
+gp.fs.0.size = 19
+
+gp.fs.0.func.0 = ec.app.predator_prey.func.add
+gp.fs.0.func.0.nc = nc2
+gp.fs.0.func.1 = ec.app.predator_prey.func.sub
+gp.fs.0.func.1.nc = nc2
+gp.fs.0.func.2 = ec.app.predator_prey.func.mult
+gp.fs.0.func.2.nc = nc2
+gp.fs.0.func.3 = ec.app.predator_prey.func.div
+gp.fs.0.func.3.nc = nc2
+gp.fs.0.func.4 = ec.app.predator_prey.func.incr
+gp.fs.0.func.4.nc = nc1
+gp.fs.0.func.5 = ec.app.predator_prey.func.decr
+gp.fs.0.func.5.nc = nc1
+gp.fs.0.func.6 = ec.app.predator_prey.func.min
+gp.fs.0.func.6.nc = nc2
+gp.fs.0.func.7 = ec.app.predator_prey.func.max
+gp.fs.0.func.7.nc = nc2
+gp.fs.0.func.8 = ec.app.predator_prey.func.ite
+gp.fs.0.func.8.nc = nc3
+gp.fs.0.func.9 = ec.app.predator_prey.func.rand
+gp.fs.0.func.9.nc = nc2
+
+gp.fs.0.func.10 = ec.app.predator_prey.func.ZERO
+gp.fs.0.func.10.nc = nc0
+gp.fs.0.func.11 = ec.app.predator_prey.func.ONE
+gp.fs.0.func.11.nc = nc0
+gp.fs.0.func.12 = ec.app.predator_prey.func.TWO
+gp.fs.0.func.12.nc = nc0
+gp.fs.0.func.13 = ec.app.predator_prey.func.THREE
+gp.fs.0.func.13.nc = nc0
+gp.fs.0.func.14 = ec.app.predator_prey.func.RAND
+gp.fs.0.func.14.nc = nc0
+
+gp.fs.0.func.15 = ec.app.predator_prey.func.LeftAgentType
+gp.fs.0.func.15.nc = nc0
+gp.fs.0.func.16 = ec.app.predator_prey.func.RightAgentType
+gp.fs.0.func.16.nc = nc0
+gp.fs.0.func.17 = ec.app.predator_prey.func.ForwardAgentType
+gp.fs.0.func.17.nc = nc0
+gp.fs.0.func.18 = ec.app.predator_prey.func.BackwardAgentType
+gp.fs.0.func.18.nc = nc0
+
+gp.fs.0.func.19 = ec.app.predator_prey.func.LeftFoodAmount
+gp.fs.0.func.19.nc = nc0
+gp.fs.0.func.20 = ec.app.predator_prey.func.RightFoodAmount
+gp.fs.0.func.20.nc = nc0
+gp.fs.0.func.21 = ec.app.predator_prey.func.ForwardFoodAmount
+gp.fs.0.func.21.nc = nc0
+gp.fs.0.func.22 = ec.app.predator_prey.func.BackwardFoodAmount
+gp.fs.0.func.22.nc = nc0
+gp.fs.0.func.23 = ec.app.predator_prey.func.CurrentFoodAmount
+gp.fs.0.func.23.nc = nc0
+
